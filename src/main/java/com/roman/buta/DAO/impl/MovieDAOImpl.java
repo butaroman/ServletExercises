@@ -22,11 +22,9 @@ public class MovieDAOImpl implements MovieDAO{
     @Override
     public List<String> findMoviesTitleByRatingIsNull() {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
         Query query = em.createQuery("SELECT m.title FROM Movie m " +
                 "WHERE m.id NOT IN(SELECT r.movie.id FROM Rating r)");
         List<String> moviesTitleList = query.getResultList();
-        em.getTransaction().commit();
         em.close();
         return moviesTitleList;
     }
@@ -52,9 +50,7 @@ public class MovieDAOImpl implements MovieDAO{
     public void deleteById(Integer movieId) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        Query query = em.createQuery("DELETE FROM Movie m WHERE m.id = :movieId");
-        query.setParameter("movieId", movieId);
-        query.executeUpdate();
+        em.remove(em.find(Movie.class, movieId));
         em.getTransaction().commit();
         em.close();
     }

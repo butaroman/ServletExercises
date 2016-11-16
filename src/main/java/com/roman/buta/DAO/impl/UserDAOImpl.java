@@ -40,4 +40,13 @@ public class UserDAOImpl implements UserDAO{
         em.close();
         return userIdList;
     }
+
+    @Override
+    public void deleteById(Integer userId) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.find(User.class, userId));
+        em.getTransaction().commit();
+        em.close();
+    }
 }

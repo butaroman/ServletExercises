@@ -17,6 +17,7 @@
             <th width="120">Rating date</th>
             <th width="120">movieId</th>
             <th width="120">userId</th>
+            <th colspan="2">Action</th>
         </tr>
         <c:forEach items="${ratingsList}" var="rating">
             <tr>
@@ -25,10 +26,12 @@
                 <td>${rating.ratingDate}</td>
                 <td>${rating.movie.id}</td>
                 <td>${rating.user.id}</td>
+                <td>
+                    <a href='task0ratings?action=delete&ratingId=<c:out value="${rating.id }"/>'>Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-
 </body>
 </html>

@@ -11,4 +11,5 @@ public interface UserDAO {
 
     List<Integer> findUsersIdByRatingDateIsNull();
 
+    void deleteById(Integer userId);
 }

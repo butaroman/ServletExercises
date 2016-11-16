@@ -14,11 +14,15 @@
         <tr>
             <th width="80">ID</th>
             <th width="120">Name</th>
+            <th colspan="2">Action</th>
         </tr>
         <c:forEach items="${usersList}" var="user">
             <tr>
                 <td>${user.id}</td>
                 <td>${user.name}</td>
+                <td>
+                    <a href='task0users?action=delete&userId=<c:out value="${user.id }"/>'>Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

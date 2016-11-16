@@ -20,8 +20,12 @@ public class Task0UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<User> usersList = userService.findAllUsers();
-        req.setAttribute("usersList", usersList);
+        String action = req.getParameter("action");
+        if(action != null && action.equalsIgnoreCase("delete") ) {
+            int userId = Integer.parseInt( req.getParameter("userId") );
+            userService.deleteUserById(userId);
+        }
+        req.setAttribute("usersList", userService.findAllUsers());
         req.getRequestDispatcher("user.jsp").forward(req, resp);
     }
 

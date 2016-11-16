@@ -13,4 +13,6 @@ public interface RatingService {
     List<Object[]> findByRatingOrderByRatingDateAsc(Integer minRating, Integer maxRating);
 
     List<Object[]> findRatingInfo();
+
+    void deleteRatingById(Integer ratingId);
 }

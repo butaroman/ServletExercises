@@ -20,6 +20,11 @@ public class Task0RatingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        String action = req.getParameter("action");
+        if(action != null && action.equalsIgnoreCase("delete") ) {
+            int ratingId = Integer.parseInt( req.getParameter("ratingId") );
+            ratingService.deleteRatingById(ratingId);
+        }
         List<Rating> ratingsList = ratingService.findAllRatings();
         req.setAttribute("ratingsList", ratingsList);
         req.getRequestDispatcher("rating.jsp").forward(req, resp);

@@ -48,4 +48,9 @@ public class RatingServiceImpl implements RatingService{
     public List<Object[]> findRatingInfo() {
         return ratingDAO.findRatingInfo();
     }
+
+    @Override
+    public void deleteRatingById(Integer ratingId) {
+        ratingDAO.deleteById(ratingId);
+    }
 }

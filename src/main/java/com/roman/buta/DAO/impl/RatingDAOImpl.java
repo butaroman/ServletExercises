@@ -59,4 +59,13 @@ public class RatingDAOImpl implements RatingDAO{
         em.close();
         return resultList;
     }
+
+    @Override
+    public void deleteById(Integer ratingId) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        em.getTransaction().begin();
+        em.remove(em.find(Rating.class, ratingId));
+        em.getTransaction().commit();
+        em.close();
+    }
 }

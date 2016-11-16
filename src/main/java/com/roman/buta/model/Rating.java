@@ -1,7 +1,5 @@
 package com.roman.buta.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -19,12 +17,10 @@ public class Rating {
     @Column(name = "rating_date")
     Timestamp ratingDate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
     Movie movie;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     User user;

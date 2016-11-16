@@ -14,4 +14,6 @@ public interface RatingDAO {
     List<Object[]> findByRatingOrderByRatingDateAsc(Integer minRating, Integer maxRating);
 
     List<Object[]> findRatingInfo();
+
+    void deleteById(Integer ratingId);
 }
