@@ -64,7 +64,10 @@ public class RatingDAOImpl implements RatingDAO{
     public void deleteById(Integer ratingId) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.find(Rating.class, ratingId));
+        Rating rating = em.find(Rating.class, ratingId);
+        if(rating != null) {
+            em.remove(rating);
+        }
         em.getTransaction().commit();
         em.close();
     }

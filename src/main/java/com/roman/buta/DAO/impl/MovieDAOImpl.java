@@ -50,7 +50,10 @@ public class MovieDAOImpl implements MovieDAO{
     public void deleteById(Integer movieId) {
         EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
         em.getTransaction().begin();
-        em.remove(em.find(Movie.class, movieId));
+        Movie movie = em.find(Movie.class, movieId);
+        if(movie != null) {
+            em.remove(movie);
+        }
         em.getTransaction().commit();
         em.close();
     }
