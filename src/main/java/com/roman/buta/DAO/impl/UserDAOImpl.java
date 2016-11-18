@@ -8,29 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImpl  extends GenericDAOImpl<User, Integer> implements UserDAO{
 
-    @Override
-    public User findById(Integer userId) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        Query query = em.createQuery("FROM User u WHERE u.id = :userId");
-        query.setParameter("userId", userId);
-        Object res = query.getSingleResult();
-        em.close();
-        if(res == null) {
-            return null;
-        } else {
-            return (User)res;
-        }
-    }
-
-    @Override
-    public List<User> findAll() {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        List<User> userList = em.createQuery("FROM User u").getResultList();
-        em.close();
-        return userList;
-    }
 
     @Override
     public List<Integer> findUsersIdByRatingDateIsNull() {
@@ -41,15 +20,4 @@ public class UserDAOImpl implements UserDAO{
         return userIdList;
     }
 
-    @Override
-    public void deleteById(Integer userId) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        User user = em.find(User.class, userId);
-        if(user != null) {
-            em.remove(user);
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
 }

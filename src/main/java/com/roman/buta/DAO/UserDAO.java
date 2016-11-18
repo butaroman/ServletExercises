@@ -1,15 +1,11 @@
 package com.roman.buta.DAO;
 
 import com.roman.buta.model.User;
+
 import java.util.List;
 
-public interface UserDAO {
-
-    User findById(Integer userId);
-
-    List<User> findAll();
+public interface UserDAO extends GenericDAO<User, Integer>{
 
     List<Integer> findUsersIdByRatingDateIsNull();
 
-    void deleteById(Integer userId);
 }

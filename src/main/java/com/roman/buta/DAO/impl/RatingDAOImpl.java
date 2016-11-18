@@ -8,25 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-public class RatingDAOImpl implements RatingDAO{
-
-    @Override
-    public Rating saveOrUpdate(Rating rating) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        Rating updatedRating = em.merge(rating);
-        em.getTransaction().commit();
-        em.close();
-        return updatedRating;
-    }
-
-    @Override
-    public List<Rating> findAll() {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        List<Rating> ratingList = em.createQuery("FROM Rating r").getResultList();
-        em.close();
-        return ratingList;
-    }
+public class RatingDAOImpl  extends GenericDAOImpl<Rating, Integer> implements RatingDAO{
 
     @Override
     public List<Rating> findRatingsWithRatingDateIsNullByUserId(Integer userId) {
@@ -60,15 +42,4 @@ public class RatingDAOImpl implements RatingDAO{
         return resultList;
     }
 
-    @Override
-    public void deleteById(Integer ratingId) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        Rating rating = em.find(Rating.class, ratingId);
-        if(rating != null) {
-            em.remove(rating);
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
 }

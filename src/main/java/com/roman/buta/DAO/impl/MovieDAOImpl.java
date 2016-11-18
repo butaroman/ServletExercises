@@ -7,17 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
 
-public class MovieDAOImpl implements MovieDAO{
-
-    @Override
-    public Movie saveOrUpdate(Movie movie) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        Movie m = em.merge(movie);
-        em.getTransaction().commit();
-        em.close();
-        return m;
-    }
+public class MovieDAOImpl extends GenericDAOImpl<Movie, Integer> implements MovieDAO{
 
     @Override
     public List<String> findMoviesTitleByRatingIsNull() {
@@ -29,32 +19,4 @@ public class MovieDAOImpl implements MovieDAO{
         return moviesTitleList;
     }
 
-    @Override
-    public Movie findById(Integer movieId) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        Movie movie = em.find(Movie.class, movieId);
-        em.close();
-        return movie;
-
-    }
-
-    @Override
-    public List<Movie> findAll() {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        List<Movie> movieList = em.createQuery("FROM Movie m").getResultList();
-        em.close();
-        return movieList;
-    }
-
-    @Override
-    public void deleteById(Integer movieId) {
-        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
-        em.getTransaction().begin();
-        Movie movie = em.find(Movie.class, movieId);
-        if(movie != null) {
-            em.remove(movie);
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
 }

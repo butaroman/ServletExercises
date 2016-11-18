@@ -3,11 +3,7 @@ package com.roman.buta.DAO;
 import com.roman.buta.model.Rating;
 import java.util.List;
 
-public interface RatingDAO {
-
-    Rating saveOrUpdate(Rating rating);
-
-    List<Rating> findAll();
+public interface RatingDAO extends GenericDAO<Rating, Integer>{
 
     List<Rating> findRatingsWithRatingDateIsNullByUserId(Integer userId);
 
@@ -15,5 +11,4 @@ public interface RatingDAO {
 
     List<Object[]> findRatingInfo();
 
-    void deleteById(Integer ratingId);
 }
